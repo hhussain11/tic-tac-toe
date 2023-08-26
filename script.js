@@ -18,12 +18,44 @@ const  playRound = () => {
 
     board[i].addEventListener('click', (event) => {
       
-      if (event.target.innerHTML == '') {game.playGame(event)};
+      if (event.target.innerHTML == '') {playGame(event)};
       
       
     })
   };
 
+  // Scoreboard
+  let max = document.querySelector('#max')
+  let playerOne = document.querySelector('.player-one');
+  let playerTwo = document.querySelector('.player-two');
+  let playerOneScore = 0;
+  let playerTwoScore = 0;
+  let maximumWins = Number(max.value);
+
+  max.addEventListener('change', () => {
+    maximumWins = Number(max.value);
+  })
+
+  
+
+  
+  let playorOneWins = () => {
+    playerOneScore+=1;
+    playerOne.innerHTML = `${playerOneScore}`
+    if (playerOneScore == maximumWins) {
+      alert('Player one has won the game!')
+      restartGame();
+    };
+  };
+
+  let playerTwoWins = () => {
+    playerTwoScore+=1;
+    playerTwo.innerHTML = `${playerTwoScore}`
+    if (playerTwoScore == maximumWins) {
+      alert('Player two has won the game!');
+      restartGame();
+    };
+  };
 
   // Counter keeps track of whos turn it is. If counter == 0, run function to input X, otherwise input O. This means counter == 0 is X's turn.
 
@@ -66,15 +98,30 @@ const  playRound = () => {
     event.target.innerHTML = 'O';
   
   }
+
+  // Clear board
+
+  const clearBoard = () => {
+    for (let i =0; i<board.length; i++) {
+    board[i].innerHTML = '';
+  };
+  }
+
   // Restart game function.
 
   const restartGame = () => {
     counter = 0;
     squares = 0;
+    playerOneScore = 0;
+    playerTwoScore = 0;
+
     
     for (let i =0; i<board.length; i++) {
       board[i].innerHTML = '';
-    }
+    };
+
+    playerOne.innerHTML = `${playerOneScore}`;
+    playerTwo.innerHTML = `${playerTwoScore}`;
   }
 
   newGame.addEventListener('click', restartGame)
@@ -91,15 +138,18 @@ const  playRound = () => {
 
       if (tl.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
+        playerTwoWins();
+
+        clearBoard();
         
       }
 
       else if (tl.innerHTML == 'X')  {
-        alert('Crosses has won!')
-        restartGame();
-        
+        alert('Crosses has won!');
+        clearBoard();
+        playorOneWins();
       }
+      
 
     }
 
@@ -109,14 +159,14 @@ const  playRound = () => {
 
       if (ml.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (ml.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -127,14 +177,14 @@ const  playRound = () => {
 
       if (bl.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (bl.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -145,14 +195,14 @@ const  playRound = () => {
 
       if (tl.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (tl.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -163,14 +213,14 @@ const  playRound = () => {
 
       if (tm.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (tm.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -181,14 +231,14 @@ const  playRound = () => {
 
       if (tr.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (tr.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -199,14 +249,14 @@ const  playRound = () => {
 
       if (tl.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (tl.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -217,14 +267,14 @@ const  playRound = () => {
 
       if (tr.innerHTML == 'O') {
         alert('Naughts has won!');
-        restartGame();
-        
+        clearBoard();
+        playerTwoWins();
       }
 
       else if (tr.innerHTML == 'X') {
         alert('Crosses has won!')
-        restartGame();
-        
+        clearBoard();
+        playorOneWins();
       }
 
     }
@@ -240,7 +290,7 @@ const  playRound = () => {
 
     if (squares == 9) {
       alert("It's a draw!")
-      restartGame()
+      clearBoard()
     }
 
 
@@ -266,6 +316,8 @@ const  playRound = () => {
 
 
 
+
+
     }
   
     else {
@@ -281,7 +333,7 @@ const  playRound = () => {
   }
   
 
-  return {changeToCross, changeToNaught, counterValue, getWhosTurn, playGame, restartGame}
+  return {changeToCross, changeToNaught, counterValue, getWhosTurn, playGame, restartGame, maximumWins}
 
 }
 

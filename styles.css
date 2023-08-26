@@ -13,3 +13,29 @@
   text-align: center;
   line-height: 90px;
 }
+
+.player-one-container, .player-two-container {
+  display: flex;
+}
+
+.player-one, .player-two {
+  margin-left: 10px;
+}
+
+.player-two-container {
+  margin-left: 5%;
+}
+
+
+.scorecard {
+  display: flex;
+}
+
+.max {
+  border: 2px solid black;
+  margin-left: 5%;
+}
+
+.max input {
+  width: 50px;
+}

@@ -1,1 +1,1 @@
-Working version with fixed values.
+Working version. New game button added. An additional input that changes max wins.
