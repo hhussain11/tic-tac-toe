@@ -1,1 +1,1 @@
-Working version
+Working version with fixed values.
